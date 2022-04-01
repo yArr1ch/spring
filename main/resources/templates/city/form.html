@@ -1,0 +1,5 @@
+<div th:fragment="form" xmlns:th="http://thymeleaf.org">
+    Name:
+    <input type="text" th:field="*{name}" class="form-control, col-xs-3"/>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></aside>
+</div>

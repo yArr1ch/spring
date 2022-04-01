@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Clients</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script th:inline="javascript">
+        function sendDelete(url) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", url, true);
+            xhttp.onload = function () {
+                let responseURL = xhttp.responseURL;
+                console.log("Redirecting to:", responseURL);
+                window.location.replace(responseURL);
+            };
+            xhttp.send();
+        }
+    </script>
+</head>
+
+<body>
+<div th:insert="header"></div>
+<div align="center">
+    <h1>Clients</h1>
+    <table class="table table-light">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone number</th>
+            <th>View</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.firstName}"></td>
+            <td th:text="${client.lastName}"></td>
+            <td th:text="${client.phoneNumber}"></td>
+            <td>
+                <a th:href="@{/client/{id} (id=${client.id})}">
+                    <input class="btn btn-primary" type="button" value="View">
+                </a>
+            </td>
+            <td>
+                <a type="button" th:with="url = @{/client/{id} (id=${client.id})}" th:onclick="sendDelete([[${url}]])">
+                    <input class="btn btn-danger" type="button" value="Delete">
+                </a>
+            </td>
+            <td>
+                <a th:object="${client}" th:href="@{/client/{id}/update(id=${client.id})}">
+                    <input class="btn btn-primary" type="button" value="Update">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/client/create">
+        <input class="btn btn-primary" type="button" value="Create a client">
+    </a>
+</div>
+<div th:insert="footer"></div>
+</body>
+</html>

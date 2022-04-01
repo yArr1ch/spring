@@ -1,0 +1,82 @@
+<div th:fragment="form" xmlns:th="http://thymeleaf.org">
+
+    <style>
+        select[readonly] option{
+            display:none;
+        }
+    </style>
+
+    Sender:
+    <select th:field="*{senderId}"
+            th:readonly="${parcel.id != null}"
+            class="btn btn-light dropdown-toggle, d-flex flex-row">
+        <option value=""></option>
+        <option th:each="client : ${clients}"
+                th:selected="${parcel.senderId == client.id}"
+                th:value="${client.id}"
+                th:text="${client.firstName} + ' ' + ${client.lastName} + ', ' + ${client.phoneNumber}">
+        </option>
+    </select>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('senderId')}" th:errors="*{senderId}"></aside>
+
+    Receiver:
+    <select th:field="*{receiverId}" class="btn btn-light dropdown-toggle, d-flex flex-row">
+        <option value=""></option>
+        <option th:each="client : ${clients}"
+                th:selected="${parcel.receiverId == client.id}"
+                th:value="${client.id}"
+                th:text="${client.firstName} + ' ' + ${client.lastName} + ', ' + ${client.phoneNumber}">
+        </option>
+    </select>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('receiverId')}" th:errors="*{receiverId}"></aside>
+
+    Origin:
+    <select th:field="*{originId}"
+            th:readonly="${parcel.id != null}"
+            class="btn btn-light dropdown-toggle, d-flex flex-row">
+        <option value=""></option>
+        <option th:each="depot : ${depots}"
+                th:selected="${parcel.originId == depot.id}"
+                th:value="${depot.id}"
+                th:text="${depot.number} + ', ' + ${depot.address} + ', ' + ${depot.city}">
+        </option>
+    </select>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('originId')}" th:errors="*{originId}"></aside>
+
+    Destination:
+    <select th:field="*{destinationId}" class="btn btn-light dropdown-toggle, d-flex flex-row">
+        <option value=""></option>
+        <option th:each="depot : ${depots}"
+                th:selected="${parcel.destinationId == depot.id}"
+                th:value="${depot.id}"
+                th:text="${depot.number} + ', ' + ${depot.address} + ', ' + ${depot.city}">
+        </option>
+    </select>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('destinationId')}" th:errors="*{destinationId}"></aside>
+
+    Description:
+    <input type="text" th:field="*{description}" th:readonly="${parcel.id != null}"
+           class="form-control, col-xs-3, d-flex flex-row"/>
+    <aside class="alert alert-danger" style="width: 300px" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></aside>
+
+    Width:
+    <input type="text" th:field="*{width}" th:readonly="${parcel.id != null}"
+           class="form-control, col-xs-3, d-flex flex-row"/>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('width')}" th:errors="*{width}"></aside>
+
+    Height:
+    <input type="text" th:field="*{height}" th:readonly="${parcel.id != null}"
+           class="form-control, col-xs-3, d-flex flex-row"/>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></aside>
+
+    Length:
+    <input type="text" th:field="*{length}" th:readonly="${parcel.id != null}"
+           class="form-control, col-xs-3, d-flex flex-row"/>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('length')}" th:errors="*{length}"></aside>
+
+    Insured price:
+    <input type="text" th:field="*{insuredPrice}" th:readonly="${parcel.id != null}"
+           class="form-control, col-xs-3, d-flex flex-row"/>
+    <aside class="alert alert-danger" style="width: 300px" th:if="${#fields.hasErrors('insuredPrice')}" th:errors="*{insuredPrice}"></aside>
+    <br/>
+</div>

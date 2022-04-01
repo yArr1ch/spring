@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Parcels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+<div align="center">
+    <h1>Parcel</h1>
+    <table class="table table-light">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Description</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Length</th>
+            <th>Insured price</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${parcel.id}"></td>
+            <td th:text="${parcel.sender.firstName} + ' ' + ${parcel.sender.lastName} + ', ' +${parcel.sender.phoneNumber}"></td>
+            <td th:text="${parcel.receiver.firstName} + ' ' + ${parcel.receiver.lastName} + ', ' +${parcel.receiver.phoneNumber}"></td>
+            <td th:text="${parcel.origin.city} + ', ' + ${parcel.origin.number} + ', ' + ${parcel.origin.address}"></td>
+            <td th:text="${parcel.destination.city} + ', ' + ${parcel.destination.number} + ', ' + ${parcel.destination.address}"></td>
+            <td th:text="${parcel.description}"></td>
+            <td th:text="${parcel.width}"></td>
+            <td th:text="${parcel.height}"></td>
+            <td th:text="${parcel.length}"></td>
+            <td th:text="${parcel.insuredPrice}"></td>
+            <td th:text="${parcel.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/parcel">
+        <input class="btn btn-primary" type="button" value="Return to list">
+    </a>
+</div>
+</body>
+</html>

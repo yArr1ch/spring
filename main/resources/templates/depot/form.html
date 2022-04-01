@@ -1,0 +1,32 @@
+<div th:fragment="form" xmlns:th="http://thymeleaf.org">
+
+    <style>
+        select[readonly] option{
+            display:none;
+        }
+    </style>
+
+    Number:
+    <input type="text" th:field="*{number}" class="form-control, col-xs-3"/>
+    </br>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></aside>
+
+    Address:
+    <input type="text" th:field="*{address}" class="form-control, col-xs-3"/>
+    </br>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></aside>
+
+    City:
+    <select th:field="*{cityId}"
+            th:readonly="${depot.id != null}"
+            class="btn btn-light dropdown-toggle">
+        <option value=""></option>
+        <option th:each="city: ${cities}"
+                th:selected="${depot.cityId == city.id}"
+                th:value="${city.id}"
+                th:text="${city.name}">
+        </option>
+    </select>
+    <aside class="alert alert-danger" style="width: 250px" th:if="${#fields.hasErrors('cityId')}" th:errors="*{cityId}"></aside>
+
+</div>
